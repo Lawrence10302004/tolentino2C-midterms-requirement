@@ -1,0 +1,921 @@
+    /* styles.css - Updated for Mobile Responsiveness */
+/* ============================================ */
+
+/* Base Mobile-First Styles */
+@media (max-width: 767px) {
+    /* General Layout Adjustments */
+    body {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    /* Navbar Adjustments */
+    .navbar-brand {
+      font-size: 1.2rem;
+    }
+  
+    .navbar-collapse {
+      padding: 10px 0;
+    }
+  
+    .navbar-nav {
+      margin-top: 10px;
+      display: inline-flex;
+    }
+  
+    #search-form {
+      margin: 10px 0;
+      width: 100%;
+    }
+  
+    /* Hero Carousel */
+    #index-hero-carousel,
+    #index-hero-carousel .carousel-item,
+    #index-hero-carousel .carousel-item img {
+      height: 200px;
+    }
+  
+    /* Product Grids */
+    .row {
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+  
+    .col-md-4 {
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-bottom: 10px;
+    }
+  
+    .card {
+      margin-bottom: 15px;
+    }
+  
+    .card-img-top {
+      height: 150px;
+    }
+  
+    /* Product Detail Page */
+    .centered-body {
+      margin-left: 0;
+      transform: none;
+      padding: 10px;
+    }
+  
+    .product-details .row {
+      flex-direction: column;
+    }
+  
+    .product-details .col-md-6 {
+      width: 100%;
+      padding: 0;
+    }
+  
+    .size-option {
+      width: 50px;
+      height: 50px;
+      font-size: 14px;
+    }
+  
+    /* Footer Adjustments */
+    footer .row > div {
+      margin-bottom: 20px;
+    }
+  
+    /* Utility Classes for Mobile */
+    .mobile-stack {
+      flex-direction: column !important;
+    }
+  
+    .mobile-full-width {
+      width: 100% !important;
+    }
+  
+    .mobile-text-center {
+      text-align: center !important;
+    }
+  
+    .mobile-mt-10 {
+      margin-top: 10px !important;
+    }
+  
+    .mobile-mb-10 {
+      margin-bottom: 10px !important;
+    }
+  }
+  
+  /* Tablet and Small Desktop */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .col-md-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  
+  /* Touch Target Sizes for Mobile */
+  button, a.btn, .size-option, .carousel-control-prev, .carousel-control-next {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Prevent Zoom on Input Focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Existing Styles Remain Below */
+  /* ============================ */
+  /* (All your existing styles remain here unchanged) */
+
+
+    /* Updated for minimalist design */
+    .centered-body {
+        margin-left: 60%;
+        transform: translateX(-50%);
+        max-width: 1300px;
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Size options with darker colors */
+    .size-option {
+        width: 70px; /* Increased size for better visibility */
+        height: 70px; /* Increased size for better visibility */
+        border-radius: 50%;
+        border: 2px solid #555; /* Darker border */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .size-option:hover {
+        background-color: #333; /* Darker background on hover */
+        color: white;
+        border-color: #222; /* Darker border on hover */
+    }
+
+    .size-option.selected {
+        background-color: #222; /* Dark selected background */
+        color: white;
+        border-color: #111; /* Darker border for selected state */
+    }
+
+    /* Adjust Back button to minimalist */
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 20px; /* Slightly bigger padding */
+        border: 2px solid #444 !important;
+        border-radius: 5px;
+        background-color: white !important;
+        color: #444 !important;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: auto; /* Automatically adjust the width */
+        padding-left: 10px; /* Adjust left padding */
+        padding-right: 10px; /* Adjust right padding */
+        text-align: center; /* Ensure text is centered */
+        white-space: nowrap; /* Prevent text from wrapping */
+    }
+
+    /* Back button hover effect */
+    .back-button:hover {
+        background-color: #444 !important; /* Dark hover background */
+        color: white !important;
+    }
+
+    .back-button i {
+        margin-right: 5px;
+    }
+
+    /* Add to Wishlist Heart Icon */
+    .add-to-wishlist {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 22px; /* Slightly bigger icon */
+        transition: color 0.3s ease;
+        width: auto; /* Automatically adjust width */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Ensure "Add to Wishlist" icon styles remain */
+    .add-to-wishlist i {
+        margin-right: 5px; /* Space between the icon and text */
+        font-size: 22px; /* Slightly bigger icon size */
+        color: #888; /* Light gray color for the outline of the heart */
+        transition: color 0.3s ease; /* Smooth transition for color */
+    }
+
+    .add-to-wishlist i:before {
+        content: "\f004"; /* Font Awesome heart icon */
+        font-family: 'Font Awesome 5 Free'; /* Use the correct font family */
+        font-weight: 900; /* Use the bold version of the icon */
+        color: #888888; /* Heart outline color (light gray) */
+        transition: color 0.3s ease; /* Smooth transition for color change */
+    }
+
+    .add-to-wishlist:hover i:before {
+        color: #e83e8c; /* Red color inside the heart when hovered */
+    }
+
+    /* Optional: Style for Wishlist text */
+    .add-to-wishlist span {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 16px; /* Slightly bigger font size */
+        color: #444; /* Darker text for the wishlist */
+    }
+
+    /* Dark background for body */
+    body {
+        font-family: 'Libre Baskerville', serif;
+        background-color: #f8f9fa; /* Light background for the body */
+        color: #333; /* Dark text color */
+    }
+
+    /* Updated carousel controls for minimalism */
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5); /* Dark background for controls */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-control-next {
+        right: 21px;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background-color: rgba(0, 0, 0, 0.7); /* Darker hover effect */
+    }
+
+    /* Description container with smooth transition */
+    #descriptionContainer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+
+    #descriptionContainer.expanded {
+        max-height: 500px; /* adjust height as needed */
+    }
+
+    /* Delivery banner */
+    .delivery-banner {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background-color: #f4f4f4; /* Lighter background for the banner */
+        color: #333; /* Dark text for the banner */
+    }
+
+    /* Adjust the background color and hover effect for "Add to Bag" */
+    .btn-primary {
+        background-color: #343a40; /* Darker shade */
+        border-color: #343a40;
+    }
+
+    .btn-primary:hover {
+        background-color: #23272b; /* Darker shade on hover */
+        border-color: #23272b;
+    }
+
+    /* Adjust the "size-option" hover effect */
+    .size-option:hover {
+        background-color: #343a40;
+        color: white;
+        border-color: #343a40;
+    }
+
+    .size-option.selected {
+        background-color: #343a40;
+        color: white;
+        border-color: #23272b;
+    }
+
+    /* Adjust the back-button hover effect */
+    .back-button:hover {
+        background-color: #343a40 !important;
+        color: white !important;
+    }
+
+    /* Update color of delivery banner */
+    /* Update the delivery-banner styles */
+    /* Update the delivery-banner styles */
+    .delivery-banner {
+        background-color: #000; /* Black background */
+        color: #fff; /* White text */
+        text-align: center;
+        padding: 10px 0;
+        border-top: 1px solid #444; /* Slightly darker border for a minimalist look */
+        border-bottom: 1px solid #444; /* Slightly darker bottom border */
+    }
+
+    /* If the banner has an icon, make sure the icon is white */
+    .delivery-banner i {
+        color: #fff; /* White icon */
+    }
+
+
+
+    /* Adjust the layout to stack buttons vertically */
+    .add-to-wishlist,
+    .back-button {
+        display: block; /* Ensure vertical stack */
+        margin-top: 20px; /* Separate with a bit more space */
+    }
+
+    /* Product details container */
+    .product-details {
+        margin-top: 20px; /* Add space above */
+        margin-bottom: 30px; /* Add space below */
+    }
+
+    /* Dior Sauvage product title */
+    .product-title {
+        font-size: 28px; /* Larger title font size */
+        font-weight: bold;
+        margin-bottom: 10px; /* Add space below */
+    }
+
+    /* Product description (Sauvage Eau de Parfum Spray) */
+    .product-description {
+        font-size: 22px; /* Bigger description text */
+        margin-bottom: 10px; /* Space below */
+    }
+
+    /* Product rating */
+    .product-rating {
+        font-size: 22px; /* Bigger rating text */
+        margin-bottom: 15px; /* Space below */
+    }
+
+    /* Product code */
+    .product-code {
+        font-size: 20px; /* Slightly bigger font size */
+        margin-bottom: 20px; /* Space below */
+    }
+
+    /* Select Size options */
+    .select-size {
+        font-size: 20px; /* Slightly bigger font size */
+        margin-bottom: 15px;
+    }
+
+    .size-option {
+        margin-right: 20px; /* Increased space between size options */
+    }
+
+
+    /* Price section */
+    .price {
+        font-size: 26px; /* Make the price a bit bigger */
+        font-weight: bold;
+        color: #343a40; /* Darker text for price */
+        margin-bottom: 20px;
+    }
+
+    /* Quantity section */
+    .quantity {
+        margin-bottom: 20px;
+    }
+
+    .quantity input {
+        font-size: 18px; /* Slightly bigger font size */
+        width: 60px; /* Adjust the size of the quantity input */
+        text-align: center;
+    }
+
+    /* Add to Wishlist button */
+    .add-to-wishlist {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 25px; /* Bigger padding */
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: color 0.3s ease;
+        background-color: #f1f1f1;
+        border: 2px solid #444;
+        border-radius: 5px;
+        color: #444;
+    }
+
+    /* Hover effect for Add to Wishlist */
+    .add-to-wishlist:hover {
+        color: #444; /* Keep text color unchanged */
+    }
+
+    /* Icon inside Add to Wishlist */
+    .add-to-wishlist i {
+        margin-right: 5px;
+        font-size: 22px;
+        color: #888;
+        transition: color 0.3s ease;
+    }
+
+    /* Hover effect for heart icon only */
+    .add-to-wishlist i:before {
+        content: "\f004";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: #888;
+        transition: color 0.3s ease;
+    }
+
+    .add-to-wishlist:hover i:before {
+        color: #e83e8c;
+    }
+    /* Fix the size and maintain aspect ratio without cropping */
+    .carousel-item img {
+        width: 100%; /* Ensures the image takes the full width of its container */
+        height: 400px; /* Fixed height for all carousel images */
+        object-fit: contain; /* Ensures the image fits inside the container without cropping */
+    }
+
+    /* Optionally: Ensure the carousel items have a consistent aspect ratio */
+    .carousel-inner {
+        height: 400px; /* Set a fixed height for the inner carousel container */
+    }
+
+
+    /* Navbar Custom Styles */
+    .navbar {
+        background-color: #343a40; /* Dark background for minimalist effect */
+    }
+
+    .navbar-brand {
+        font-family: 'Playfair Display', serif; /* Elegant font for the brand name */
+        font-size: 1.8rem; /* Larger font size */
+        font-weight: 700;
+        color: #fff !important;
+    }
+
+    .navbar-nav .nav-link {
+        color: #f8f9fa; /* Light color for text */
+        font-size: 1.1rem; /* Slightly larger text */
+        padding: 0.5rem 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ffc107; /* Subtle hover effect with a golden color */
+    }
+
+    .navbar-toggler-icon {
+        background-color: #ffffff00; /* White color for the hamburger icon */
+    }
+
+    .navbar-light .navbar-toggler {
+        border-color: #fff; /* White border for the toggle button */
+    }
+
+    .form-control {
+        border-radius: 30px; /* Rounded search bar */
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5); /* Gold shadow on focus */
+    }
+
+    .btn-outline-light {
+        border-radius: 30px; /* Rounded button */
+        border-color: #fff;
+        color: #fff;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-outline-light:hover {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    /* Style for the Read More button */
+    #readMoreBtn {
+        background-color: transparent; /* No background */
+        border: 2px solid #444; /* Dark border */
+        color: #444; /* Dark text color */
+        padding: 10px 20px; /* Padding around the text */
+        border-radius: 5px; /* Rounded corners */
+        font-size: 16px; /* Medium font size */
+        font-weight: bold; /* Bold text */
+        text-transform: uppercase; /* Uppercase letters */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: all 0.3s ease; /* Smooth transition for color changes */
+        display: block; /* Makes the button block-level */
+        margin: 20px auto; /* Centers it horizontally and adds margin on top and bottom */
+        text-align: center; /* Ensures text inside is centered */
+    }
+
+    /* Hover effect for Read More button */
+    #readMoreBtn:hover {
+        background-color: #343a40; /* Dark background on hover */
+        color: white; /* White text on hover */
+        border-color: #343a40; /* Dark border on hover */
+    }
+
+    /* Optional: Focus effect */
+    #readMoreBtn:focus {
+        outline: none; /* Remove default outline */
+    }
+
+    /* Adjust the "Read More ▼" text for minimalism */
+    #readMoreBtn span {
+        font-weight: normal; /* Make the "▼" less bold */
+        margin-left: 5px; /* Space between the text and the arrow */
+    }
+
+    #descriptionContainer {
+        font-size: 18px !important; /* Force the font size to apply */
+    }
+
+    /* Notification container styling for both Add to Bag and Add to Wishlist */
+    .notificationBag, .notificationWishlist {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: none; /* Initially hidden */
+        background-color: #28a745; /* Green for Add to Bag */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        z-index: 9999;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    /* Styling for Add to Wishlist notification (different design) */
+    .notificationWishlist {
+        background-color: #dc3545; /* Red color */
+        color: white;
+    }
+
+    /* Display notification when 'show' class is added */
+    .notificationBag.show, .notificationWishlist.show {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Icon Styling */
+    .check-icon {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    .heart-icon {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+    #addToWishlist .fa-heart {
+        margin-right: 5px;
+    }
+
+    /* Hover effect */
+    #addToWishlist:hover {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    /* Enhanced Icon and Badge Sizes */
+    #navCartIcon, #navWishlistIcon {
+        font-size: 1.4rem; /* Increased from 1.2rem */
+        padding: 0.6rem; /* Slightly more padding */
+        position: relative;
+    }
+
+    .cart-badge, .wishlist-badge {
+        font-size: 0.75rem; /* Slightly larger text */
+        min-width: 20px; /* Increased from 18px */
+        height: 20px; /* Increased from 18px */
+        top: -6px; /* Adjusted positioning */
+        right: -8px; /* Adjusted positioning */
+        padding: 0.2em 0.5em; /* Better padding */
+    }
+
+    /* Optional: Add this if you want the icons to stand out more */
+    #navCartIcon i, #navWishlistIcon i {
+        transition: transform 0.2s ease;
+    }
+
+    #navCartIcon:hover i, #navWishlistIcon:hover i {
+        transform: scale(1.1);
+    }
+
+    /* Color refinements for better visibility */
+    .cart-badge {
+        background-color: #3B82F6 !important; /* Force blue */
+        color: white !important;
+        border: none !important; /* Remove any existing borders */
+        box-shadow: none !important;
+    }
+
+    .wishlist-badge {
+        background-color: #8B5CF6 !important; /* Force purple */
+        color: white !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-effect:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Remove spacing that causes visual separation */
+    /* Card structure */
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Images - full height with max constraint */
+.card-img-top {
+    width: auto;
+    max-height: 200px; /* Adjust based on your needs */
+    object-fit: contain;
+    margin: 0 auto; /* Center horizontally */
+    padding: 10px 0; /* Optional spacing */
+}
+
+/* Card body takes remaining space */
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Button at bottom */
+.card-body .btn {
+    margin-top: auto;
+}
+    
+    
+
+    /* Add to your existing CSS file */
+
+/* Adjust the right-alignment of the icons container */
+.navbar-nav.ms-auto {
+  margin-right: 1.5rem; /* Adjust this value as needed */
+}
+
+/* OR if you want to target specifically these icons */
+.navbar-nav .nav-item:last-child {
+  margin-right: 1rem; /* Creates space on the right */
+}
+
+/* For even more precise control */
+/* Enhanced Notification Badges */
+/* Enhanced Notification Badges - Right Adjusted */
+.navbar-nav .badge {
+    font-size: 0.9rem;
+    min-width: 24px;
+    height: 24px;
+    padding: 0.4em 0.4em;
+    background-color: #4a5568 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: white !important;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-20%, -20%);  /* Changed from -40% to -20% for more right */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+/* Adjust hover to match */
+.navbar-nav .nav-link:hover .badge {
+    background-color: #2d3748 !important;
+    transform: translate(-20%, -20%) scale(1.05); /* Consistent adjustment */
+}
+
+/* If you're using the shopping bag icon */
+.fa-shopping-bag {
+    margin-left: 5px; /* Small right nudge */
+}
+
+/* EXCLUSIVE STYLING FOR INDEX.HTML CAROUSEL ONLY */
+#index-hero-carousel {
+    max-width: 1400px;  /* Adjust width as needed */
+    margin: 20px auto;  /* Centers the carousel */
+    height: 400px;      /* Fixed height */
+    border-radius: 10px; /* Optional rounded corners */
+}
+
+#index-hero-carousel .carousel-inner,
+#index-hero-carousel .carousel-item,
+#index-hero-carousel .carousel-item img {
+    height: 100%;       /* Fill container height */
+    object-fit: cover;   /* Maintain aspect ratio */
+}
+
+/* Custom navigation arrows */
+#index-hero-carousel .carousel-control-prev,
+#index-hero-carousel .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 50%;
+}
+
+#index-hero-carousel {
+    max-width: 1400px;
+    margin: 20px auto;
+    height: 400px;
+}
+#index-hero-carousel .carousel-inner,
+#index-hero-carousel .carousel-item,
+#index-hero-carousel .carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 30px;
+}
+.page-item.active .page-link {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.page-link {
+    color: #6c757d;
+}
+
+
+/* Mobile-first responsive styles */
+@media (max-width: 767.98px) {
+    /* Hero Carousel */
+    #index-hero-carousel {
+      margin-top: 56px; /* Account for fixed navbar */
+    }
+    
+    .carousel-item img {
+      height: 50vh;
+      object-fit: cover;
+    }
+    
+    /* Product Grid */
+    .container.mt-5 {
+      margin-top: 1.5rem !important;
+      padding: 0 10px;
+    }
+    
+    .row {
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+    
+    .col-md-4 {
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-bottom: 10px;
+    }
+    
+    /* Product Cards */
+    .perfume-card .card {
+      margin-bottom: 10px;
+    }
+    
+    .perfume-card .card-img-top {
+      height: 150px;
+      object-fit: contain;
+    }
+    
+    .perfume-card .card-body {
+      padding: 10px;
+    }
+    
+    .perfume-card .card-title {
+      font-size: 0.9rem;
+    }
+    
+    .perfume-card .price {
+      font-size: 0.9rem;
+    }
+    
+    /* Buttons */
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
+    
+    /* Pagination */
+    .pagination .page-link {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+    
+    /* Search Results */
+    #search-results {
+      width: 100%;
+      left: 0;
+      right: 0;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    
+    /* Modal adjustments */
+    .modal-dialog {
+      margin: 0.5rem auto;
+    }
+    
+    .modal-content {
+      border-radius: 0;
+    }
+    
+    /* Cart/Wishlist items */
+    .d-flex.align-items-center.mb-3 {
+      flex-wrap: wrap;
+    }
+    
+    .d-flex.align-items-center.mb-3 img {
+      width: 40px !important;
+      height: 40px !important;
+    }
+    
+    /* Notification */
+    #notification {
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.8rem;
+      padding: 8px 15px;
+    }
+  }
+  
+  /* Additional mobile optimizations */
+  @media (max-width: 575.98px) {
+    /* Make carousel full viewport height */
+    .carousel-item img {
+      height: 40vh;
+    }
+    
+    /* Single column layout for very small screens */
+    .col-md-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    
+    /* Smaller text */
+    h2.text-center.mb-4 {
+      font-size: 1.5rem;
+    }
+    
+    /* Footer adjustments */
+    footer .row > div {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  /* General mobile-friendly styles */
+  /* Touch target sizes */
+  .btn, .page-link, .carousel-control-prev, .carousel-control-next {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Viewport meta tag optimization */
+  /* (Already in your head section - good!) */
+  

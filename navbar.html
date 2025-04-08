@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container">
+        <a class="navbar-brand" href="/index.html">Haven | Perfume Collection</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/mens.html">Men's</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/womens.html">Women's</a>
+                </li>
+            </ul>
+            <form class="d-flex ms-3 position-relative" id="search-form">
+                <input class="form-control me-2 border-0 rounded-3" 
+                       type="search" 
+                       id="perfume-search"
+                       placeholder="Search perfumes..." 
+                       aria-label="Search"
+                       autocomplete="off">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+                <div class="dropdown-menu w-100 p-0 position-absolute top-100 start-0 mt-1" 
+                     id="search-results"
+                     style="display: none; z-index: 1000; max-height: 400px; overflow-y: auto;">
+                    <!-- Results will appear here -->
+                </div>
+            </form>
+        
+            <ul class="navbar-nav navbar-collapse">
+                <li class="nav-item position-relative">
+                    <a class="nav-link px-2" href="#" title="Wishlist">
+                        <i class="fas fa-heart fa-lg"></i>
+                        <span id="wishlist-badge" 
+                             class="position-flex top-0 start-100 translate-middle badge rounded-circle bg-gray-700 border border-light"
+                             data-initial-value="0">0</span>
+                    </a>
+                </li>
+                <li class="nav-item position-relative ms-3">
+                    <a class="nav-link px-2" href="#" title="Cart">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span id="cart-badge" 
+                             class="position-flex top-0 start-100 translate-middle badge rounded-circle bg-gray-700 border border-light"
+                             data-initial-value="0">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

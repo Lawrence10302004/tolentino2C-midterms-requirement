@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven | Perfume Collection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <!-- Hero Carousel -->
+    <div id="index-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/perfumes images/featured/banner.avif" class="d-block w-100" alt="Featured Perfume">
+            </div>
+            <div class="carousel-item">
+                <img src="/perfumes images/featured/banner3.avif" class="d-block w-100" alt="Featured Perfume">
+            </div>
+            <div class="carousel-item">
+                <img src="/perfumes images/featured/banner4.avif" class="d-block w-100" alt="Featured Perfume">
+            </div>
+            <div class="carousel-item">
+                <img src="/perfumes images/featured/banner5.avif" class="d-block w-100" alt="Featured Perfume">
+            </div>
+            <div class="carousel-item">
+                <img src="/perfumes images/featured/banner6.avif" class="d-block w-100" alt="Featured Perfume">
+            </div>
+            <div class="carousel-item">
+                <img src="/perfumes images/featured/banner7.jpg" class="d-block w-100" alt="Featured Perfume">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#index-hero-carousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#index-hero-carousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    
+    <!-- Product Grid -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Featured Perfume Collection</h2>
+        <div class="row" id="featured-perfumes-container"></div>
+        <nav aria-label="Featured perfumes pagination" class="mt-4">
+            <ul class="pagination justify-content-center" id="featured-pagination"></ul>
+        </nav>
+    </div>
+
+    <div id="footer-container"></div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart and wishlist from localStorage or create empty arrays
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            
+            // JavaScript to load the navbar from navbar.html
+            fetch('/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                    
+                    // Update badge counts after navbar loads
+                    updateBadges();
+                    
+                    // Add cart/wishlist event listeners after navbar loads
+                    addCartWishlistListeners();
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        
+            // Function to update badge counts
+            function updateBadges() {
+                const cartBadge = document.getElementById('cart-badge');
+                const wishlistBadge = document.getElementById('wishlist-badge');
+                
+                if (cartBadge) cartBadge.textContent = cart.length;
+                if (wishlistBadge) wishlistBadge.textContent = wishlist.length;
+                
+                // Store updated lists in localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            }
+            
+            // Function to add cart/wishlist event listeners
+            function addCartWishlistListeners() {
+                const cartIcon = document.querySelector('.fa-shopping-cart');
+                const wishlistIcon = document.querySelector('.fa-heart');
+                
+                if (cartIcon) {
+                    cartIcon.closest('a').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showCartModal();
+                    });
+                }
+                
+                if (wishlistIcon) {
+                    wishlistIcon.closest('a').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showWishlistModal();
+                    });
+                }
+            }
+            
+            // Function to show notification
+            function showNotification(message) {
+                // Create notification element if it doesn't exist
+                let notification = document.getElementById('notification');
+                if (!notification) {
+                    notification = document.createElement('div');
+                    notification.id = 'notification';
+                    notification.style.position = 'fixed';
+                    notification.style.bottom = '20px';
+                    notification.style.right = '20px';
+                    notification.style.padding = '10px 20px';
+                    notification.style.backgroundColor = '#333';
+                    notification.style.color = 'white';
+                    notification.style.borderRadius = '5px';
+                    notification.style.zIndex = '10000';
+                    notification.style.transition = 'opacity 0.5s';
+                    document.body.appendChild(notification);
+                }
+                
+                notification.textContent = message;
+                notification.style.opacity = '1';
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                }, 3000);
+            }
+            
+            // Function to show cart modal
+            function showCartModal() {
+                const modalContent = `
+                    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Your Shopping Cart</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ${cart.length === 0 ? 
+                                        '<p>Your cart is empty</p>' : 
+                                        cart.map(item => `
+                                            <div class="d-flex align-items-center mb-3">
+                                                <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover;" class="me-3">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">${item.name}</h6>
+                                                    <small>$${item.price} x ${item.quantity}</small>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-danger remove-from-cart" data-id="${item.id}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                                    ${cart.length > 0 ? '<button type="button" class="btn btn-primary">Checkout</button>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add modal to DOM
+                document.body.insertAdjacentHTML('beforeend', modalContent);
+                
+                // Initialize Bootstrap modal
+                const modal = new bootstrap.Modal(document.getElementById('cartModal'));
+                modal.show();
+                
+                // Handle removal of items
+                document.querySelectorAll('.remove-from-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = this.getAttribute('data-id');
+                        cart = cart.filter(item => item.id !== itemId);
+                        updateBadges();
+                        modal.hide();
+                        document.getElementById('cartModal').remove();
+                        showCartModal(); // Refresh modal
+                    });
+                });
+                
+                // Clean up when modal is closed
+                document.getElementById('cartModal').addEventListener('hidden.bs.modal', function() {
+                    this.remove();
+                });
+            }
+            
+            // Function to show wishlist modal
+            function showWishlistModal() {
+                const modalContent = `
+                    <div class="modal fade" id="wishlistModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Your Wishlist</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ${wishlist.length === 0 ? 
+                                        '<p>Your wishlist is empty</p>' : 
+                                        wishlist.map(item => `
+                                            <div class="d-flex align-items-center mb-3">
+                                                <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover;" class="me-3">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">${item.name}</h6>
+                                                    <small>$${item.price}</small>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-danger remove-from-wishlist" data-id="${item.id}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success ms-2 move-to-cart" data-id="${item.id}">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add modal to DOM
+                document.body.insertAdjacentHTML('beforeend', modalContent);
+                
+                // Initialize Bootstrap modal
+                const modal = new bootstrap.Modal(document.getElementById('wishlistModal'));
+                modal.show();
+                
+                // Handle removal of items
+                document.querySelectorAll('.remove-from-wishlist').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = this.getAttribute('data-id');
+                        wishlist = wishlist.filter(item => item.id !== itemId);
+                        updateBadges();
+                        modal.hide();
+                        document.getElementById('wishlistModal').remove();
+                        showWishlistModal(); // Refresh modal
+                    });
+                });
+                
+                // Handle moving items to cart
+                document.querySelectorAll('.move-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = this.getAttribute('data-id');
+                        const item = wishlist.find(item => item.id === itemId);
+                        
+                        if (item) {
+                            addToCart({...item, quantity: 1});
+                            wishlist = wishlist.filter(wishItem => wishItem.id !== itemId);
+                            updateBadges();
+                            modal.hide();
+                            document.getElementById('wishlistModal').remove();
+                            showWishlistModal(); // Refresh modal
+                        }
+                    });
+                });
+                
+                // Clean up when modal is closed
+                document.getElementById('wishlistModal').addEventListener('hidden.bs.modal', function() {
+                    this.remove();
+                });
+            }
+            
+            // Global functions to add items
+            window.addToCart = function(perfume) {
+                // Check if item already exists in cart
+                const existingItem = cart.find(item => item.id === perfume.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += perfume.quantity || 1;
+                } else {
+                    cart.push({
+                        id: perfume.id,
+                        name: perfume.name,
+                        price: perfume.price,
+                        image: perfume.image,
+                        quantity: perfume.quantity || 1
+                    });
+                }
+                
+                updateBadges();
+                showNotification('Added to cart!');
+            };
+            
+            window.addToWishlist = function(perfume) {
+                // Check if item already exists in wishlist
+                const existingItem = wishlist.find(item => item.id === perfume.id);
+                
+                if (!existingItem) {
+                    wishlist.push({
+                        id: perfume.id,
+                        name: perfume.name,
+                        price: perfume.price,
+                        image: perfume.image
+                    });
+                    
+                    updateBadges();
+                    showNotification('Added to wishlist!');
+                } else {
+                    showNotification('Already in wishlist!');
+                }
+            };
+        
+            // Perfume pagination system
+            const PERFUMES_PER_PAGE = 10;
+            let currentPage = 1;
+            
+            // Load and display all perfumes in shuffled order with pagination
+            Promise.all([
+                fetch('/mens.html').then(res => res.text()),
+                fetch('/womens.html').then(res => res.text())
+            ])
+            .then(([mensHtml, womensHtml]) => {
+                // Parse both HTML files
+                const parser = new DOMParser();
+                const mensDoc = parser.parseFromString(mensHtml, 'text/html');
+                const womensDoc = parser.parseFromString(womensHtml, 'text/html');
+                
+                // Combine all perfumes with proper gender tagging
+                const allPerfumes = [
+                    ...Array.from(mensDoc.querySelectorAll('.col-md-4')).map(card => {
+                        const clone = card.cloneNode(true);
+                        clone.dataset.gender = 'Men'; // Add gender data attribute
+                        return clone;
+                    }), 
+                    ...Array.from(womensDoc.querySelectorAll('.col-md-4')).map(card => {
+                        const clone = card.cloneNode(true);
+                        clone.dataset.gender = 'Women'; // Add gender data attribute
+                        return clone;
+                    })
+                ];
+                
+                // Shuffle the perfumes array
+                const shuffledPerfumes = shuffleArray(allPerfumes);
+                
+                // Initialize pagination
+                const pageCount = Math.ceil(shuffledPerfumes.length / PERFUMES_PER_PAGE);
+                createPagination('featured-pagination', pageCount, (page) => {
+                    currentPage = page;
+                    displayPerfumes(shuffledPerfumes, 'featured-perfumes-container', page);
+                    scrollToTop();
+                });
+                
+                // Display first page
+                displayPerfumes(shuffledPerfumes, 'featured-perfumes-container', currentPage);
+                
+                // Enhance perfume cards with cart/wishlist buttons
+                enhancePerfumeCards();
+            })
+            .catch(error => console.error('Error loading perfumes:', error));
+            
+            // Enhance perfume cards with cart/wishlist buttons
+            function enhancePerfumeCards() {
+                document.querySelectorAll('.perfume-card').forEach(card => {
+                    const addToCartBtn = card.querySelector('.add-to-cart');
+                    const addToWishlistBtn = card.querySelector('.add-to-wishlist');
+                    
+                    if (addToCartBtn) {
+                        addToCartBtn.addEventListener('click', function() {
+                            const perfumeData = {
+                                id: card.dataset.id,
+                                name: card.querySelector('.card-title').textContent.trim(),
+                                price: parseFloat(card.querySelector('.price').textContent.replace('$', '')),
+                                image: card.querySelector('img').src
+                            };
+                            addToCart(perfumeData);
+                        });
+                    }
+                    
+                    if (addToWishlistBtn) {
+                        addToWishlistBtn.addEventListener('click', function() {
+                            const perfumeData = {
+                                id: card.dataset.id,
+                                name: card.querySelector('.card-title').textContent.trim(),
+                                price: parseFloat(card.querySelector('.price').textContent.replace('$', '')),
+                                image: card.querySelector('img').src
+                            };
+                            addToWishlist(perfumeData);
+                        });
+                    }
+                });
+            }
+            
+            // Fisher-Yates shuffle algorithm
+            function shuffleArray(array) {
+                const newArray = [...array];
+                for (let i = newArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                }
+                return newArray;
+            }
+            
+            // Display perfumes for a specific page
+            function displayPerfumes(allPerfumes, containerId, page) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                const start = (page - 1) * PERFUMES_PER_PAGE;
+                const end = start + PERFUMES_PER_PAGE;
+                const perfumesToShow = allPerfumes.slice(start, end);
+                
+                perfumesToShow.forEach(perfume => {
+                    container.appendChild(perfume.cloneNode(true));
+                });
+                
+                // Re-enhance perfume cards after display
+                enhancePerfumeCards();
+            }
+            
+            // Scroll to top function
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Create pagination controls
+            function createPagination(paginationId, pageCount, onPageChange) {
+                const pagination = document.getElementById(paginationId);
+                pagination.innerHTML = '';
+                
+                // Previous button
+                const prevLi = document.createElement('li');
+                prevLi.className = 'page-item';
+                prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>`;
+                prevLi.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const active = pagination.querySelector('.active');
+                    if (active) {
+                        const currentPage = parseInt(active.textContent);
+                        if (currentPage > 1) {
+                            onPageChange(currentPage - 1);
+                            updateActivePage(pagination, currentPage - 1);
+                        }
+                    }
+                });
+                pagination.appendChild(prevLi);
+                
+                // Page numbers
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.className = `page-item ${i === 1 ? 'active' : ''}`;
+                    li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                    li.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        onPageChange(i);
+                        updateActivePage(pagination, i);
+                    });
+                    pagination.appendChild(li);
+                }
+                
+                // Next button
+                const nextLi = document.createElement('li');
+                nextLi.className = 'page-item';
+                nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>`;
+                nextLi.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const active = pagination.querySelector('.active');
+                    if (active) {
+                        const currentPage = parseInt(active.textContent);
+                        if (currentPage < pageCount) {
+                            onPageChange(currentPage + 1);
+                            updateActivePage(pagination, currentPage + 1);
+                        }
+                    }
+                });
+                pagination.appendChild(nextLi);
+            }
+            
+            // Update active page in pagination
+            function updateActivePage(pagination, newPage) {
+                const pages = pagination.querySelectorAll('.page-item');
+                pages.forEach((page, index) => {
+                    // Skip prev/next buttons (first and last elements)
+                    if (index > 0 && index < pages.length - 1) {
+                        const pageNumber = parseInt(page.textContent);
+                        page.classList.toggle('active', pageNumber === newPage);
+                    }
+                });
+            }
+        
+            // Search Functionality (without gender labeling)
+            const checkNavbarLoaded = setInterval(function() {
+                const searchForm = document.getElementById('search-form');
+                if (searchForm) {
+                    clearInterval(checkNavbarLoaded);
+                    initSearch();
+                }
+            }, 100);
+        
+            function initSearch() {
+                const searchInput = document.getElementById('perfume-search');
+                const searchResults = document.getElementById('search-results');
+                let allPerfumes = [];
+        
+                function getPerfumeData(card) {
+                    return {
+                        id: card.dataset.id || Math.random().toString(36).substr(2, 9),
+                        name: card.querySelector('.card-title b')?.textContent?.trim() || 
+                              card.querySelector('.card-title')?.textContent?.trim() || 
+                              'Unknown',
+                        brand: card.querySelector('.opacity')?.textContent?.trim() || 
+                               'Unknown',
+                        price: parseFloat(card.querySelector('.price')?.textContent?.replace('$', '')) || 0,
+                        image: card.querySelector('img')?.src || '',
+                        link: card.querySelector('a')?.href || '#'
+                    };
+                }
+        
+                async function loadAllPerfumes() {
+                    try {
+                        const [mensResponse, womensResponse] = await Promise.all([
+                            fetch('mens.html').then(res => res.text()),
+                            fetch('womens.html').then(res => res.text())
+                        ]);
+                        
+                        const parser = new DOMParser();
+                        const mensDoc = parser.parseFromString(mensResponse, 'text/html');
+                        const womensDoc = parser.parseFromString(womensResponse, 'text/html');
+                        
+                        // Process all perfumes without gender distinction
+                        const menCards = Array.from(mensDoc.querySelectorAll('.col-md-4'));
+                        const womenCards = Array.from(womensDoc.querySelectorAll('.col-md-4'));
+                        const allCards = [...menCards, ...womenCards];
+                        
+                        allPerfumes = allCards.map(card => getPerfumeData(card)).filter(Boolean);
+                        
+                        console.log('Loaded perfumes:', allPerfumes.length);
+                    } catch (error) {
+                        console.error('Error loading perfumes:', error);
+                        searchResults.innerHTML = `
+                            <div class="dropdown-item text-danger">
+                                Error loading perfumes. Please refresh.
+                            </div>
+                        `;
+                        searchResults.style.display = 'block';
+                    }
+                }
+        
+                function showSearchResults(term) {
+                    searchResults.innerHTML = '';
+                    term = term.toLowerCase().trim();
+                    
+                    if (term.length < 2) {
+                        searchResults.style.display = 'none';
+                        return;
+                    }
+                    
+                    const matches = allPerfumes.filter(perfume => 
+                        perfume.name.toLowerCase().includes(term) || 
+                        perfume.brand.toLowerCase().includes(term)
+                    ).slice(0, 5);
+                    
+                    if (matches.length > 0) {
+                        matches.forEach(perfume => {
+                            const item = document.createElement('a');
+                            item.className = 'dropdown-item d-flex justify-content-between align-items-center py-2 px-3';
+                            item.href = perfume.link;
+                            item.innerHTML = `
+                                <div>
+                                    <strong>${perfume.name}</strong>
+                                    <div class="text-muted small">${perfume.brand}</div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary add-to-cart-search" 
+                                        data-id="${perfume.id}"
+                                        data-name="${perfume.name}"
+                                        data-price="${perfume.price}"
+                                        data-image="${perfume.image}">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            `;
+                            searchResults.appendChild(item);
+                        });
+                        
+                        // Add event listeners to search result buttons
+                        document.querySelectorAll('.add-to-cart-search').forEach(button => {
+                            button.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                addToCart({
+                                    id: this.dataset.id,
+                                    name: this.dataset.name,
+                                    price: parseFloat(this.dataset.price),
+                                    image: this.dataset.image
+                                });
+                            });
+                        });
+                    } else {
+                        const noResults = document.createElement('div');
+                        noResults.className = 'dropdown-item text-muted py-2 px-3';
+                        noResults.textContent = `No results found for "${term}"`;
+                        searchResults.appendChild(noResults);
+                    }
+                    
+                    searchResults.style.display = 'block';
+                }
+        
+                // Initialize search
+                searchInput.addEventListener('focus', async () => {
+                    if (allPerfumes.length === 0) {
+                        await loadAllPerfumes();
+                    }
+                });
+                
+                let typingTimer;
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(() => {
+                        showSearchResults(e.target.value);
+                    }, 300);
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('#search-form')) {
+                        searchResults.style.display = 'none';
+                    }
+                });
+                
+                document.getElementById('search-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (searchResults.firstChild?.tagName === 'A') {
+                        window.location.href = searchResults.firstChild.href;
+                    }
+                });
+            }
+        
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+        
+                    // Add submit functionality after the footer has loaded
+                    const form = document.getElementById('contactForm');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
+        
+                            const confirmation = document.getElementById('submitConfirmation');
+                            confirmation.textContent = 'Submitted successfully';
+                            confirmation.style.opacity = '1';
+        
+                            this.reset();
+        
+                            setTimeout(() => {
+                                confirmation.style.opacity = '0';
+                                setTimeout(() => confirmation.textContent = '', 300);
+                            }, 3000);
+                        });
+                    }
+                });
+        });
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

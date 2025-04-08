@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Your Perfume Store</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --bg-dark: #1a1a1a;
+      --text-light: #e0e0e0;
+      --text-lighter: #b0b0b0;
+      --border-dark: #333;
+      --accent: #e3b3b0;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: white;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    header {
+      background-color: var(--bg-dark);
+      color: white;
+      padding: 60px 0 80px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      color: var(--text-lighter);
+      font-size: 1.2rem;
+      max-width: 700px;
+    }
+
+    .about-section {
+      padding: 80px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-bottom: 40px;
+      color: var(--bg-dark);
+      text-transform: uppercase;
+    }
+
+    .section-content {
+      display: flex;
+      gap: 60px;
+    }
+
+    .section-text {
+      flex: 1;
+    }
+
+    .section-image {
+      flex: 1;
+      background-color: #f5f5f5;
+      min-height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .value-card {
+      padding: 30px;
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+
+    .value-card:hover {
+      border-color: var(--bg-dark);
+    }
+
+    .value-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: var(--bg-dark);
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: #e3b3b0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>About Our Perfume Store</h1>
+      <p class="subtitle">Your trusted source for 100% authentic perfumes for men and women</p>
+    </div>
+  </header>
+
+  <section class="about-section">
+    <div class="container">
+      <h2 class="section-title">Our Story</h2>
+      <div class="section-content">
+        <div class="section-text">
+          <p>We are a passionate team dedicated to bringing you genuine, high-quality perfumes from the world’s most iconic brands. Our mission began with a simple goal: to make luxury fragrances more accessible to everyone.</p>
+          <p>We do not manufacture our own scents—instead, we source and import only 100% authentic perfumes from trusted suppliers and distributors. Whether you're looking for bold, woody tones or soft, floral notes, our curated selection includes something for both men and women.</p>
+          <p>We take pride in offering customers the real deal—no imitations, no knock-offs. Just original fragrances at competitive prices, delivered with care and commitment.</p>
+        </div>
+        <img src="/perfumes images/featured/logo1.png" class="img-fluid" alt="logo 1">
+
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="container">
+      <h2 class="section-title">Our Mission</h2>
+      <div class="section-content">
+        <img src="/perfumes images/featured/logo2.png" class="img-fluid" alt="logo 2">
+        <div class="section-text" style="order: 1;">
+          <p>Our mission is to provide customers with a trusted and convenient destination to shop for genuine designer perfumes. We aim to:</p>
+          <ul style="line-height: 2;">
+            <li>Offer a wide range of authentic fragrances for men and women</li>
+            <li>Ensure every product we sell is original and sourced from verified suppliers</li>
+            <li>Deliver excellent service and fast, secure shipping</li>
+          </ul>
+          <p>We are here to help you find the scent that perfectly matches your personality and style—without ever compromising on authenticity or quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" style="border-bottom: none;">
+    <div class="container">
+      <h2 class="section-title">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3 class="value-title">Authenticity</h3>
+          <p>We guarantee that every perfume we sell is 100% original and sourced from official distributors.</p>
+        </div>
+        <div class="value-card">
+          <h3 class="value-title">Trust</h3>
+          <p>Our customers trust us to deliver genuine products and reliable service every time.</p>
+        </div>
+        <div class="value-card">
+          <h3 class="value-title">Affordability</h3>
+          <p>Luxury doesn’t have to come with a high price. We offer competitive prices for premium brands.</p>
+        </div>
+        <div class="value-card">
+          <h3 class="value-title">Service</h3>
+          <p>We’re here to help—from product recommendations to after-sales support. Your satisfaction is our priority.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="/index.html" class="back-button mt-3">
+        <i class="fas fa-arrow-left"></i> Back to Homepage
+    </a>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Your Perfume Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
